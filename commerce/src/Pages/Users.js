@@ -28,7 +28,6 @@ function Users() {
     getUsers()
     .then((response) => {
       setAllUsers(response.data);
-      console.log(response.data)
       setIsLoading(false);
     }).catch((err) => {
       console.log(err);

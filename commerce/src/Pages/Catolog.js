@@ -15,7 +15,6 @@ function Catolog() {
       .then((response) => {
         setData(response);
         setIsLoading(false);
-        console.log(response);
       })
       .catch((error) => {
         console.error(error);

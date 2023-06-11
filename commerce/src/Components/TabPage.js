@@ -8,7 +8,6 @@ function TabPage({ cargoLocations, basket }) {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { setUserObj } = useUserData();
     const toast = useToast()
-    console.log(locationInt)
     return (
         <>
             <Button colorScheme="orange" onClick={onOpen}>Buy Now</Button>

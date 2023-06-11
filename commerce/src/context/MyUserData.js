@@ -17,9 +17,6 @@ export const UserDataProvider = ({ children }) => {
         sessionStorage.setItem("userHash", newUserObjHash)
         editUser(userObj.id, userObj)
         setIsLogin(true)
-        console.log("Obje değişti.")
-        console.log(userObj)
-        
     }, [userObj])
     const doLogin =(data)=>{
         setIsLogin(true);

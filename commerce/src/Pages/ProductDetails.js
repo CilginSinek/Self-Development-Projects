@@ -22,7 +22,6 @@ function ProductDetails() {
       .then((response) => {
         setThisProduct(response);
         setIsLoading(false);
-        console.log(response)
       })
       .catch((error) => {
         console.error(error);

@@ -27,7 +27,6 @@ function CargoLocForm({ cargoLocations }) {
                 duration: 3000,
                 isClosable: true,
             }))
-            console.log(locationArray)
         }
     });
     return (
