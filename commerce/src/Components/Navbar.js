@@ -36,6 +36,9 @@ function Navbar() {
                   <Button colorScheme='orange'>Basket</Button>
                 </Link>
               }
+              <Link to="/newproduct">
+                <Button colorScheme='yellow' >Create New Product</Button>
+              </Link>
               <Link to="/profile">
                 <Button>Profile</Button>
               </Link>

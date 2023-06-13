@@ -1,7 +1,7 @@
 import { Box, Button, Flex, FormControl, FormLabel, Heading, Input, useToast } from '@chakra-ui/react'
 import { useFormik } from 'formik'
-import React from 'react'
-import { Navigate } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, Navigate } from 'react-router-dom'
 import { useUserData } from '../../context/MyUserData'
 import validationSchema from './validations'
 import { pushClothes } from '../../Api'
@@ -9,6 +9,7 @@ import { pushClothes } from '../../Api'
 function NewProduct() {
   const toast = useToast();
   const {isLogin, userObj} = useUserData();
+  const [isDone, setIsDone] = useState(false);
   const formik = useFormik({
     initialValues:{
       image:"",
@@ -19,7 +20,17 @@ function NewProduct() {
     validationSchema,
     onSubmit: async (values)=>{
       try {
-        await pushClothes(userObj.id,values)
+        const isSuc = await pushClothes(userObj.id, values.image, values.name, values.description, values.price)
+        if(isSuc.status ==="error") throw isSuc.message
+        setIsDone(true);
+        toast({
+          title: 'Success',
+          description: isSuc.message,
+          position:"top-right",
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
       } catch (error) {
         toast({
           title: 'Error',
@@ -34,15 +45,18 @@ function NewProduct() {
   });
 
   if(!isLogin || userObj.isBan){
-    <Navigate to="/Login"/>
+    return <Navigate to="/Login"/>
   };
+  if(isDone) return <Navigate to="/profile"/>
 
   return (
     <>
-      <Button onClick={() => <Navigate to="/profile" />}>Go Back</Button>
+      <Link to="/profile">
+        <Button>Go Back</Button>
+      </Link>
       <Box>
+      <Heading as="h3">Add new product</Heading>
         <Flex>
-          <Heading as="h3">Add new product</Heading>
           <Box>
             <form onSubmit={formik.handleSubmit}>
               <FormControl>

@@ -10,6 +10,7 @@ import FavScroll from '../Components/FavScroll'
 function Basket() {
   const { isLogin, userObj, setUserObj } = useUserData()
 
+  //basic async component kurulumu
   const [ClothesArray, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -28,10 +29,11 @@ function Basket() {
       });
   }, [userObj]);
 
-
+  //async yapisi yuklenirken gosterilen component
   if (isLoading) {
     return (
       <>
+        {/* basket bossa catologa gonder */}
         {!userObj.basket.length ? <Navigate to="/" /> :
           <>
             Loading...
@@ -44,14 +46,18 @@ function Basket() {
 
   return (
     <>
+      {/* eger giris yapilmissa logine gonder */}
       {!isLogin ? <Navigate to="/Login" /> :
         <>
+          {/* eger basket bossa profile gonder */}
           {!userObj.basket.length ? <Navigate to="" /> :
             <div>
               <Heading as="h1" size="2xl">Basket</Heading>
+
               <Flex alignItems="center" justifyContent="center" >
                 <Box width="1000px">
                   <Box className='basket-row'>
+                    {/* basketteki itemleri aldigim urun verileri ile eslestirip gorsellestiriyorum */}
                     {
                       userObj.basket.map((item) =>
                         <Flex key={item} flexWrap="nowrap" flexDirection="row" justifyContent="space-between" alignItems="center" gap={2}>
@@ -60,6 +66,7 @@ function Basket() {
                               <Box>
                                 <Image width={55} height={55} src={ClothesArray[item - 1].img} alt={`${ClothesArray[item - 1].name} img`} />
                               </Box>
+
                               <Box>
                                 <Text fontSize={20}>
                                   {ClothesArray[item - 1].name}
@@ -67,6 +74,7 @@ function Basket() {
                               </Box>
                             </Flex>
                           </Box>
+
                           <Box>
                             <Flex gap={10} alignItems="center">
                               <Box>
@@ -74,6 +82,7 @@ function Basket() {
                                   {ClothesArray[item - 1].price} TL
                                 </Text>
                               </Box>
+                              {/* silme butonu ekliyorum */}
                               <CloseButton onClick={() => HandleBasketFav(item, "delete", "basket", userObj, setUserObj)} size='md' />
                             </Flex>
                           </Box>
@@ -81,7 +90,9 @@ function Basket() {
                     }
                   </Box>
                   <Flex flexDirection="row-reverse" alignItems="center" gap={5}>
+                    {/* siparis etme modelini ekliyorum */}
                     <TabPage cargoLocations={userObj.cargoLocations} basket={userObj.basket} />
+                    {/* toplam ucreti yazdiriyorum */}
                     <Text fontSize={25}>
                       {
                         userObj.basket.reduce((acc, num) => {
@@ -96,7 +107,8 @@ function Basket() {
                   </Flex>
                 </Box>
               </Flex>
-              {!(userObj.fav === 0) &&
+              {/* eger favori varsa scroll olarak favorileri goster */}
+              {userObj.fav !== 0 &&
                 <Box>
                   <FavScroll fav={userObj.fav} />
                 </Box>

@@ -20,6 +20,7 @@ function Login() {
     onSubmit: async (values) => {
       try {
         const userData = await getUser(values.email, values.password)
+        //veri alip verinin durumuna gore obje ya da hata gonderiyorum
         if (userData.status === "error") throw userData.message
         doLogin(userData.obj)
         toast({
@@ -47,6 +48,7 @@ function Login() {
 
   return (
     <>
+    {/* eger giris yapilmissa profile gidiyor */}
       {isLogin ? <Navigate to="/profile" /> :
         <div>
           <Flex align="center" width="full" justifyContent="center">

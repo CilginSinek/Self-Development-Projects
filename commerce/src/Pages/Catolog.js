@@ -4,7 +4,7 @@ import MyCard from '../Components/MyCard.js';
 import { getAllClothes } from '../Api.js';
 
 function Catolog() {
-
+  //basic async component kurulumu
   const [ClothesArray, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -21,11 +21,11 @@ function Catolog() {
         setIsLoading(false);
       });
   }, []);
-
+  //veriler gelene kadar yukleme ekrani
   if (isLoading) {
     return <div>Loading...</div>;
   }
-
+  //gelen verileri grid ile card compenentlerine boldum
   return (
     <div>
       <Box>

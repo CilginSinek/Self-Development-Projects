@@ -1,17 +1,20 @@
 import axios from "axios"
 
+//butun kullanicileri getir
 export const getUsers = async () => {
     const response = await axios.get('https://6467941260c8cb9a2c978e3b.mockapi.io/users')
     return response
 };
 
+//secilen kullaniciyi getir
 export const getSelectedUser = async (id) => {
     const allusers = await getUsers();
     const usersArray = allusers.data;
     const thisUser = usersArray.filter((user) => user.id === id);
     return thisUser
-}
+};
 
+// giris yapan kullaniciyi getir
 export const getUser = async (email, password) => {
     const allUsers = await getUsers();
     const mailExist = allUsers.data.filter((user) => user.mail === email)
@@ -28,6 +31,7 @@ export const getUser = async (email, password) => {
     }
 };
 
+//kayit olan kullaniciyi postla
 export const pushUser = async (email, password, name) => {
 
     const allUsers = await getUsers();
@@ -50,10 +54,12 @@ export const pushUser = async (email, password, name) => {
 
 };
 
+//kayitli kullaniciyi guncelle
 export const editUser = async (id, obj) => {
     await axios.put(`https://6467941260c8cb9a2c978e3b.mockapi.io/users/${id}`, obj)
 };
 
+//butun kiyafetleri getir
 export const getAllClothes = async () => {
     try {
         const response = await axios.get('https://6467941260c8cb9a2c978e3b.mockapi.io/users');
@@ -71,17 +77,20 @@ export const getAllClothes = async () => {
     }
 };
 
-export const pushClothes = async (userId, obj) => {
+//yeni kiyafet postla
+export const pushClothes = async (userId, img, name, dec, price) => {
     const allclothes = await getAllClothes()
-    const isExist = allclothes.filter((item) => item.name === obj.name)
+    const obj = {name:name, img:img, dec:dec, price:price}
+    const isExist = allclothes.filter((item) => item.name === name)
     if (!isExist.length) {
         await axios.post(`https://6467941260c8cb9a2c978e3b.mockapi.io/users/${userId}/clothes`, obj)
+        return { status: "success", obj: obj, message: "Your product add list" }
     } else {
-        throw new Error("This product already exist.")
+        return { status: "error", obj: obj, message: "Your product already exist" }
     }
-}
+};
 
-
+//secilen kiyafeti getir
 export const getClothes = async (urun_id) => {
     const getAllProduct = await getAllClothes();
     const getAllUsers = await getUsers();
@@ -91,9 +100,12 @@ export const getClothes = async (urun_id) => {
     return { ...selectedClothes[0], autherName: clothesAuther[0].name }
 };
 
+//secilen kiyafeti sil
 export const deleteClothes = async (userId, id) => {
     await axios.delete(`https://6467941260c8cb9a2c978e3b.mockapi.io/users/${userId}/clothes/${id}`)
 };
+
+//secilen kisinin ban degerini degistir
 export const setBanUser = async (userId, isBan) => {
     const allusers = await getUsers()
     const alluserData = allusers.data;
@@ -103,6 +115,8 @@ export const setBanUser = async (userId, isBan) => {
     selectedUser.clothes = selectedUser.clothes.map(item => ({ ...item, isBan: isBan }));
     await editUser(userId, selectedUser);
 };
+
+//secilen kisinin adminligini degistir
 export const setMod = async (userId, isMod) => {
     const allusers = await getUsers();
     const alluserData = allusers.data;
@@ -111,4 +125,4 @@ export const setMod = async (userId, isMod) => {
     selectedUser.isAdmin = !isMod;
     await editUser(userId, selectedUser);
 
-}
+};

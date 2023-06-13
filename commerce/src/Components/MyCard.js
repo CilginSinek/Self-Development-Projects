@@ -11,6 +11,7 @@ function MyCard({ item, setData }) {
     const { userObj } = useUserData()
     const toast = useToast()
     const { isLogin } = useUserData()
+    //Banli kullanici itemi gosterilmiyor
     if (item.isBan) {
         return null
     }
@@ -18,6 +19,7 @@ function MyCard({ item, setData }) {
         <>
             <Card maxW='400px' minW="300px">
                 <CardBody>
+                    {/* Card img */}
                     <Link to={`/urun/${item.id}`}>
                         <Image
                             src={item.img}
@@ -25,6 +27,7 @@ function MyCard({ item, setData }) {
                             borderRadius='lg'
                         />
                     </Link>
+                    {/* Card information */}
                     <Stack mt='6' spacing='3'>
                         <Heading size='md'>{item.name}</Heading>
                         <Text>{regexDate(item.createdAt)}</Text>
@@ -32,14 +35,16 @@ function MyCard({ item, setData }) {
                         <Text color='blue.600' fontSize='2xl'>{item.price} TL</Text>
                     </Stack>
                     <Box>
+                        {/* Kullanici giris yapmis ve admin olmus olmasi gereken buttonlar */}
                         {userObj !== null && userObj.isAdmin &&
                             <ButtonGroup spacing='2'>
+                                {/* Ban ve delete product buttons */}
                                 <BanButton id={item.userId} isBan={item.isBan}>Ban</BanButton>
                                 <Button onClick={() => {deleteClothes(item.userId, item.id).then((response) => toast({
                                     title: 'Success',
                                     description: "Product has been deleted",
                                     position: "top-right",
-                                    status: 'error',
+                                    status: 'success',
                                     duration: 3000,
                                     isClosable: true,
                                 })).catch((err) => toast({
@@ -61,6 +66,7 @@ function MyCard({ item, setData }) {
                 <Divider />
                 <CardFooter>
                     <ButtonGroup spacing='2'>
+                        {/* giris yapmissa ve yapmamissa button ozellikleri degisiyor. */}
                         {isLogin &&
                             <>
                                 <BasketButton id={item.id} />

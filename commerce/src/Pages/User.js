@@ -8,6 +8,7 @@ import SliderScroll from '../Components/SliderScroll';
 
 function User() {
   const { user_id } = useParams();
+  //basic async kurulum
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false)
   const [thisUser, setThisUser] = useState(null);
@@ -28,15 +29,19 @@ function User() {
 
   }, [user_id])
 
+  //loading page
   if (isLoading) {
     return <div>Loading...</div>
   }
+
+  //error page
   if (isError) {
     <div>Beklenmeyen bir hatayla karşılaşıldı</div>
   }
   return (
     <div>
       <Box>
+        {/* adminse ya da banliysa yazdir */}
         {thisUser.isAdmin && <Text color='blue.400'><strong>Admin</strong></Text>}
         {thisUser.isBan && <Text color="red.300">This user has been banned</Text>}
         <Box>
@@ -46,6 +51,7 @@ function User() {
           <Text>
             {thisUser.name}
           </Text>
+          {/* kisi gizliyse gosterme */}
           {!thisUser.isPriv && thisUser.addressCity && thisUser.addressCountry &&
             <Flex>
               <TriangleDownIcon />
@@ -57,6 +63,7 @@ function User() {
           <Text>
             this user join us in:{regexDate(thisUser.createdAt)}
           </Text>
+          {/* kisi gizliyse gosterme */}
           {!thisUser.isPriv &&
             <Box>
               <Link href={`mailto:${thisUser.mail}`}>
@@ -69,6 +76,7 @@ function User() {
           }
         </Box>
       </Box>
+      {/* sattigi kiyafetleri goster */}
       {thisUser.clothes.length &&
         <Box>
           <Accordion defaultIndex={[0]} allowMultiple>

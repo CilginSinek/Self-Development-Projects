@@ -20,6 +20,7 @@ import ModButton from '../Components/Buttons/ModButton';
 
 function Users() {
   const { userObj, isLogin } = useUserData()
+  //basic async kurulum
   const [allUsers, setAllUsers] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isErr, setIsErr] = useState(false)
@@ -34,10 +35,12 @@ function Users() {
       setIsErr(true);
     })
   },[])
+  // error, loading, nonadmin pages
   if (isErr) return <Text>Beklenmeyen bir hata oluştu</Text>
   if (isLoading) return <Text>Loading...</Text>
   if (!userObj.isAdmin || !isLogin) return <Text>Buraya sadece moderatörler girebilir</Text>
 
+  //kayitli kullanicilari tabloya yazdir
   return (
     <>
       <TableContainer>

@@ -18,6 +18,7 @@ function TabSettings() {
             <ModalHeader>Editing Your Information</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
+              {/* edit user componentini modelin icine koyuyorum */}
               <EditUser onClose={onClose}/>
             </ModalBody>
             <ModalFooter paddingBottom={"5px"} paddingRight={"5px"} >

@@ -3,6 +3,7 @@ import { banUser, unBanUser } from "../Api"
 
 const HandleBan = async (id, isBan, setArr) => {
     const toast = useToast()
+    //banliysa banini ac degilse banla ve toast goster
     if (isBan) {
         unBanUser(id).then((response) => toast({
             title: 'Success',
@@ -36,6 +37,7 @@ const HandleBan = async (id, isBan, setArr) => {
             isClosable: true,
         }));
     }
+    //fron-end icin elimdeki arrayi da duzenleyip veriyorum.
     setArr((prevArr) => {
         const updatedArr = prevArr.map((item) => {
             if (item.id === id) {

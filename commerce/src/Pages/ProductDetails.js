@@ -11,6 +11,7 @@ import { useUserData } from '../context/MyUserData'
 function ProductDetails() {
   const { isLogin } = useUserData()
   const { urun_id } = useParams()
+  //basic async kurulum
   const [thisProduct, setThisProduct] = useState(null)
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(false);
@@ -31,9 +32,11 @@ function ProductDetails() {
 
   }, [urun_id]);
 
+  //veriler yuklenene kadar gosterilen component
   if (isLoading) {
     return <div>Loading...</div>;
   }
+  //error component
   if(isError){
     let message
     if(parseInt(urun_id) <= 0 || isNaN(urun_id)){
@@ -43,6 +46,7 @@ function ProductDetails() {
     }
     return <div>{message}</div>
   }
+  //kullanici banli ise gostermeden geri cik
   if(thisProduct.isBan){
     return (
       <>
@@ -78,6 +82,7 @@ function ProductDetails() {
             <Box>{thisProduct.price}</Box>
           </Box>
           <Box>
+            {/* sepete eklemek icin login istiyor */}
             {isLogin &&
               <>
                 <BasketButton id={urun_id} />

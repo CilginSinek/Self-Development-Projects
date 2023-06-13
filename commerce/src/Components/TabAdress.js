@@ -29,6 +29,7 @@ function TabAdress() {
                     <ModalHeader>Editing Your Information</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
+                        {/* eger hic kayitli adresi yoksa forma gonder yoksa listeye */}
                         {locations.length === 0 ?
                             <>
                                 <CargoLocForm cargoLocations={locations} />
@@ -36,6 +37,7 @@ function TabAdress() {
 
                             :
                             <>
+                                {/* eger yeni adres ekleme modundaysa forma degilse listeye */}
                                 {isCreate ?
                                     <>
                                         <Button onClick={() => setIscreate(false)}>Back to list</Button>
@@ -45,6 +47,7 @@ function TabAdress() {
                                     <>
                                         <>
                                             <Button onClick={() => setIscreate(true)}>Create new one</Button>
+                                            {/* listede adresleri yazan ve silme butonu olan itemler */}
                                             <Box>
                                                 {
                                                     locations.map((item, key) =>

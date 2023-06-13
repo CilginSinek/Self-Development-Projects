@@ -5,7 +5,9 @@ import { setMod } from '../../Api';
 function ModButton({ isMod, id, setArr }) {
     const toast = useToast()
     if (isMod) {
+        //userDatada admin mi degil mi sorgusu
         return <Button onClick={() => {
+            // Adminligini duzeltip toast ekliyor veritabaninda
             setMod(id, isMod).then((response) => toast({
                 title: 'Success',
                 description: "User has taked Administer",
@@ -21,6 +23,7 @@ function ModButton({ isMod, id, setArr }) {
                 duration: 3000,
                 isClosable: true,
             }));
+            // Adminligini userDatadan duzenliyor(front-end)
             setArr((prevArr) => {
                 const updatedArr = prevArr.map((item) => {
                     if (item.id === id) {
@@ -33,6 +36,7 @@ function ModButton({ isMod, id, setArr }) {
         }} colorScheme='orange' color={"white"}>Unadmin</Button>
     } else {
         return <Button onClick={() => {
+            // Adminligini duzeltip toast ekliyor veritabaninda
             setMod(id, isMod).then((response) => toast({
                 title: 'Success',
                 description: "User has gived Administer",
@@ -48,6 +52,7 @@ function ModButton({ isMod, id, setArr }) {
                 duration: 3000,
                 isClosable: true,
             }));
+            // Adminligini userDatadan duzenliyor(front-end)
             setArr((prevArr) => {
                 const updatedArr = prevArr.map((item) => {
                     if (item.id === id) {

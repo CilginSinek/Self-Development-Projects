@@ -8,10 +8,13 @@ const FavButton = ({ id }) => {
     const { userObj, setUserObj } = useUserData();
     const handleClick = () => {
         const process = userObj.fav.includes(id) ? "delete" : "add";
+        //user datada secilen product varsa sil yoksa ekle diyor processe
         HandleBasketFav(id, process, "fav", userObj, setUserObj);
+        //userObj duzenliyor
     };
 
     const buttonText = userObj.fav.includes(id) ? "Favorilerden kaldır" : "Favorilere ekle";
+    //varsa kaldir yoksa ekle yazisi
     return (
         <>
             <Button variant='ghost' colorScheme='blue' onClick={() => {

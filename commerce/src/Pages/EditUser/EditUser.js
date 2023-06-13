@@ -8,7 +8,6 @@ import {
 import React from 'react'
 import { useFormik } from 'formik';
 import { useUserData } from '../../context/MyUserData'
-import { Navigate } from 'react-router-dom';
 import validationSchema from "./validations"
 
 
@@ -29,10 +28,10 @@ function EditUser({onClose}) {
     validationSchema,
     onSubmit: async(values) =>{
       try {
+        //yeni verileri userobje yukluyorum
         setUserObj((prevUserObj) => {
           return { ...prevUserObj, ...values };
         });
-        <Navigate to="/profile"/>
       } catch (error) {
         toast({
           title: 'Error',

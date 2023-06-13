@@ -15,10 +15,12 @@ function CargoLocForm({ cargoLocations }) {
         },
         validationSchema,
         onSubmit: (values) => {
+            //Sadece veri tabani kullandigimden ve async islem yapmadigimdan try cache kullanmadim.
             const locationArray = [values.country, values.city, values.zipcode];
             setUserObj((prevUserObj) => {
                 return { ...prevUserObj, cargoLocations: [...cargoLocations, locationArray] };
             });
+            //yeni addresi userObj ye ekledim. ve toast gosterdim.
             toast(toast({
                 title: 'Success',
                 description: "Adresiniz kaydedildi",
@@ -31,6 +33,7 @@ function CargoLocForm({ cargoLocations }) {
     });
     return (
         <form onSubmit={formik.handleSubmit}>
+            {/* Country input */}
             <FormControl>
                 <FormLabel htmlFor="country">Country</FormLabel>
                 <Input
@@ -41,7 +44,7 @@ function CargoLocForm({ cargoLocations }) {
                     isInvalid={formik.touched.country && formik.errors.country}
                 />
             </FormControl>
-
+            {/* City input */}
             <FormControl mt={4}>
                 <FormLabel htmlFor="city">City</FormLabel>
                 <Input
@@ -52,7 +55,7 @@ function CargoLocForm({ cargoLocations }) {
                     isInvalid={formik.touched.city && formik.errors.city}
                 />
             </FormControl>
-
+            {/* Zipcode input */}
             <FormControl mt={4}>
                 <FormLabel htmlFor="zipcode">Zipcode</FormLabel>
                 <Input

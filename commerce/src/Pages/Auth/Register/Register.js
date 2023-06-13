@@ -12,20 +12,21 @@ function Register({ history }) {
 
   const formik = useFormik({
     initialValues: {
-      name:"",
+      name: "",
       Email: "",
       Password: "",
       PasswordConfirm: ""
     },
     validationSchema,
-    onSubmit: async (values, bag) => {
+    onSubmit: async (values) => {
       try {
+        //yeni kisi verisi gonderiliyor verinin durumuna gore toast aciyor
         let isSuccess = await pushUser(values.Email, values.Password, values.name);
         if (isSuccess.status === "error") throw isSuccess.message;
         toast({
           title: 'Success',
           description: isSuccess.message,
-          position:"top-right",
+          position: "top-right",
           status: 'success',
           duration: 3000,
           isClosable: true,
@@ -34,7 +35,7 @@ function Register({ history }) {
         toast({
           title: 'Error',
           description: error,
-          position:"top-right",
+          position: "top-right",
           status: 'error',
           duration: 3000,
           isClosable: true,
@@ -46,6 +47,7 @@ function Register({ history }) {
 
   return (
     <>
+      {/* giris yapilmissa profile gonderiyor */}
       {isLogin ? <Navigate to="/profile" /> :
         <div>
           <Flex align="center" width="full" justifyContent="center">

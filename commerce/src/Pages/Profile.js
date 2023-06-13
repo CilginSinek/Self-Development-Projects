@@ -24,31 +24,43 @@ function Profile() {
                     {userObj.avatar.length ? <Avatar size="2xl" name={userObj.name} src={userObj.avatar} /> : <Avatar size="2xl" name={userObj.name} src='https://w0.peakpx.com/wallpaper/979/89/HD-wallpaper-purple-smile-design-eye-smily-profile-pic-face-thumbnail.jpg' />
                     }
                 </Box>
+
                 <Box>
                     <Text>
                         {userObj.name}
                     </Text>
+
                     {userObj.addressCity && userObj.addressCountry &&
                         <Text>
                             <TriangleDownIcon /> {userObj.addressCity}/{userObj.addressCountry}
                         </Text>
                     }
+
                     <Text>
                         Join in {regexDate(userObj.createdAt)}
                     </Text>
+
+                    {/* banliysa ban yazisi goster */}
                     {userObj.isBan &&
                         <Text color="red.300">Your banned from commerce</Text>
                     }
+
+                    {/* editlenebilir acikleme componenti */}
                     <EditDec userDec={userObj.userDec} setUserObj={setUserObj} />
+                    
+                    {/* kisinin gizliligi */}
                     {userObj.isPriv ? <Button onClick={() => setUserObj((prevState) => { return { ...prevState, isPriv: false } })}><LockIcon /></Button> : <Button onClick={() => setUserObj((prevState) => { return { ...prevState, isPriv: true } })}><UnlockIcon /></Button>}
                 </Box>
+
                 <Box>
+                    {/* kisi banliysa ayar yapamaz */}
                     {!userObj.isBan &&
                         <TabSettings />
                     }
                     <TabAdress />
                 </Box>
                 <Box>
+                    {/* fav ve satilik giysi downbox scroll */}
                     <FavScroll fav={userObj.fav} />
                     <Accordion allowMultiple>
                         <AccordionItem>

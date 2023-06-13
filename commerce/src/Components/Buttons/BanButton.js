@@ -5,6 +5,7 @@ import { setBanUser } from '../../Api'
 function BanButton({ isBan, id, setArr }) {
     const toast = useToast()
     if (isBan) {
+        //Banliysa unban Button
         return <Button onClick={() => {
             setBanUser(id, isBan).then((response) => toast({
                 title: 'Success',
@@ -21,6 +22,7 @@ function BanButton({ isBan, id, setArr }) {
                 duration: 3000,
                 isClosable: true,
             }));
+            // User Datasindan ban ozelligini degistir
             setArr((prevArr) => {
                 const updatedArr = prevArr.map((item) => {
                     if (item.id === id) {
@@ -48,6 +50,7 @@ function BanButton({ isBan, id, setArr }) {
                 duration: 3000,
                 isClosable: true,
             }));
+            // User Datasindan ban ozelligini degistir
             setArr((prevArr) => {
                 const updatedArr = prevArr.map((item) => {
                     if (item.id === id) {

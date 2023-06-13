@@ -7,6 +7,7 @@ import Login from '../Pages/Auth/Login/Login';
 import Basket from '../Pages/Basket';
 import Profile from '../Pages/Profile';
 import ProductDetils from "../Pages/ProductDetails"
+import NewProduct from "../Pages/NewProduct/NewProduct"
 import noPage from '../Pages/noPage';
 import EditUser from '../Pages/EditUser/EditUser';
 import Users from '../Pages/Users';
@@ -27,6 +28,7 @@ function Container() {
                         <Route path="/profile" Component={Profile} />
                         <Route path='/profile/edit' Component={EditUser} />
                         <Route path='/urun/:urun_id' Component={ProductDetils} />
+                        <Route path='/newproduct' Component={NewProduct} />
                         <Route path='/users' Component={Users} />
                         <Route path='/users/:user_id' Component={User} />
                         <Route path='*' Component={noPage} />
