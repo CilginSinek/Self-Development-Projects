@@ -7,11 +7,15 @@ function Card({ item }) {
 
   const HandleClick = () => {
     if (item.matched) return false;
+    //* eslesmis mi sorgusu
     dispatch(setOpen(item));
+    //* Karti aciyorum
     setTimeout(() => {
       dispatch(setSelect(item));
-    }, 1000);
+    }, 2000);
+    //* Kart eslesmis mi sorgusu (kart kapanmasin diye timeout)
   };
+
 
   return (
     <div className="grid-item scene">
@@ -28,7 +32,7 @@ function Card({ item }) {
         </div>
         <div className="card__face card__face--back">
           <span>
-            <img className={`${item.matched ? "matched" : ""} sex`} src={item.img} />
+            <img className={item.matched ? "matched" : ""} src={item.img} />
           </span>
         </div>
       </div>
