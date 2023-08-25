@@ -11,11 +11,13 @@ Yazılım dillerinin logoları ile hazırlanan bir hafıza oyunudur.
 
 -Oyun bütün kartlar eşleşene kadar devam eder. 
 
-### Kullanılan teknolojiler
--React
+## Kullanılan teknolojiler
+- React
 
--Redux
+- Redux
 
--Vite
-#### Kurulum
-``npm install && npm run dev``
+- Vite
+## Kurulum
+```bash
+npm install && npm run dev
+```
