@@ -8,6 +8,7 @@ require("dotenv").config();
 
 //* import Routers
 const pageRouter = require("./router/pageRouter");
+const authRouter = require("./router/authRouter");
 
 //* app settings
 const app = express();
@@ -42,6 +43,7 @@ app.use(
 
 //* SET ROUTER
 app.use("/",pageRouter)
+app.use("/auth",authRouter)
 
 app.listen(port, () => {
   const link = hyperlinker('http://localhost:'+port, 'http://localhost:'+port);
